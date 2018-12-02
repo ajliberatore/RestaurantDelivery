@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">Restaurant Delivery</string>
+  <string name="error_title">Uh Oh</string>
+  <string name="restaurant_list_error_message">There was an error trying to retrieve restaurants near by. Try again later.</string>
+  <string name="restaurant_detail_message">There was an error trying to retrieve details for this restaurant. Try again later.</string>
+  <string name="ok">OK</string>
+</resources>

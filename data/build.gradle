@@ -1,0 +1,77 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion android_compile_sdk_version
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion android_target_sdk_version
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    implementation project(':domain')
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Dagger
+    implementation 'com.google.dagger:dagger-android:2.12'
+    implementation 'com.google.dagger:dagger-android-support:2.12'
+    kapt 'com.google.dagger:dagger-android-processor:2.12'
+    kapt 'com.google.dagger:dagger-compiler:2.12'
+
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    compileOnly "javax.annotation:jsr250-api:$javax_annotation_version"
+    implementation "com.google.dagger:dagger:$dagger_version"
+
+    kaptTest "com.google.dagger:dagger-compiler:$dagger_version"
+    testCompileOnly "javax.annotation:jsr250-api:$javax_annotation_version"
+    testImplementation "com.google.dagger:dagger:$dagger_version"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
+    androidTestCompileOnly "javax.annotation:jsr250-api:$javax_annotation_version"
+    androidTestImplementation "com.google.dagger:dagger:$dagger_version"
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxjava:$rx_java2_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android2_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
+    implementation "com.tbruyelle.rxpermissions2:rxpermissions:$rx_permissions_version"
+
+    //Retrofit
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+
+    //GSON
+    implementation "com.google.code.gson:gson:$gson_version"
+
+    //Test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation "org.mockito:mockito-inline:$mockito_version"
+    testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
+
+    implementation "com.android.support:appcompat-v7:${support_version}"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
